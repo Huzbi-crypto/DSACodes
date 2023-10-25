@@ -32,10 +32,33 @@ Node *buildBinaryTree(Node *root) {
     return root;
 }
 
+void levelOrderTraversal(Node *&root) {
+    queue<Node*> qu;
+    qu.push(root);
+    qu.push(NULL);
+
+    while (!qu.empty()) {
+        Node *temp = qu.front();
+        qu.pop();
+        if (temp == NULL) {
+            cout << endl;
+            if (!qu.empty())
+                qu.push(NULL);
+        } else {
+            cout << temp->val << " ";
+            if (temp->left) qu.push(temp->left);
+            if (temp->right) qu.push(temp->right);
+        }
+    }
+}
+
 int main() {
     Node *root;
 
+    // values: 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
     root = buildBinaryTree(root);
+
+    levelOrderTraversal(root);
 
     return 0;
 }
