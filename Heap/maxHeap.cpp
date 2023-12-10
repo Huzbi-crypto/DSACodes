@@ -65,15 +65,15 @@ class Heap {
     }
 };
 
-void heapify(int* arr, int size, int index) {
+void heapify(int arr[], int size, int index) {
     int largest = index;
     int leftIndex = index * 2;
     int rightIndex = index * 2 + 1;
 
     // if left child is greater than parent then largest = left child
-    if (leftIndex < size && arr[largest] < arr[leftIndex]) {
+    if (leftIndex <= size && arr[largest] < arr[leftIndex]) {
         largest = leftIndex;
-    } else if (rightIndex < size && arr[largest] < arr[rightIndex]) { // if right child is greater than parent then largest = right child
+    } else if (rightIndex <= size && arr[largest] < arr[rightIndex]) { // if right child is greater than parent then largest = right child
         largest = rightIndex;
     } else { // if parent is greater than both children then return
         return;
@@ -86,15 +86,13 @@ void heapify(int* arr, int size, int index) {
     }
 }
 
-void heapSort(int *arr, int size) {
-    if (size == 0) {
-        return;
+void heapSort(int arr[], int size) {
+    int s = size;
+    while (s > 1) {
+        swap(arr[1], arr[s]);
+        s--;
+        heapify(arr, s, 1);
     }
-    // step 1: swap first and last element
-    swap(arr[1], arr[size]); // swap first and last element
-    // step 2: heapify
-    size--; // reduce size of heap by 1
-    heapify(arr, size, 1); // heapify the array
 }
 
 int main() {
@@ -124,7 +122,7 @@ int main() {
     }
 
     // code for heap sort
-    int arr2[] = {-1, 50, 55, 53, 52, 54};
+    int arr2[] = {-1, 54, 53, 55, 52, 50};
     int size2 = 5;
     for (int i = size2 / 2; i >= 1; i--) {
         heapify(arr2, size2, i);
@@ -138,6 +136,6 @@ int main() {
     for (int i = 1; i <= size2; i++) {
         cout << arr2[i] << " ";
     }
-    
+
     return 0;
 }
