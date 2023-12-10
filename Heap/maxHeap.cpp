@@ -86,6 +86,17 @@ void heapify(int* arr, int size, int index) {
     }
 }
 
+void heapSort(int *arr, int size) {
+    if (size == 0) {
+        return;
+    }
+    // step 1: swap first and last element
+    swap(arr[1], arr[size]); // swap first and last element
+    // step 2: heapify
+    size--; // reduce size of heap by 1
+    heapify(arr, size, 1); // heapify the array
+}
+
 int main() {
     Heap h;
     h.insert(50);
@@ -112,5 +123,21 @@ int main() {
         cout << arr[i] << " ";
     }
 
+    // code for heap sort
+    int arr2[] = {-1, 50, 55, 53, 52, 54};
+    int size2 = 5;
+    for (int i = size2 / 2; i >= 1; i--) {
+        heapify(arr2, size2, i);
+    }
+    cout << endl << "Heapified array: ";
+    for (int i = 1; i <= size2; i++) {
+        cout << arr2[i] << " ";
+    }
+    heapSort(arr2, size2);
+    cout << endl << "Sorted array: ";
+    for (int i = 1; i <= size2; i++) {
+        cout << arr2[i] << " ";
+    }
+    
     return 0;
 }
