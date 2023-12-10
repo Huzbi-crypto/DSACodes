@@ -65,6 +65,27 @@ class Heap {
     }
 };
 
+void heapify(int* &arr, int size, int index) {
+    int largest = index;
+    int leftIndex = index * 2;
+    int rightIndex = index * 2 + 1;
+
+    // if left child is greater than parent then largest = left child
+    if (leftIndex < size && arr[largest] < arr[leftIndex]) {
+        largest = leftIndex;
+    } else if (rightIndex < size && arr[largest] < arr[rightIndex]) { // if right child is greater than parent then largest = right child
+        largest = rightIndex;
+    } else { // if parent is greater than both children then return
+        return;
+    }
+
+    // swap parent with largest child
+    if (largest != index) {
+        swap(arr[largest], arr[index]);
+        heapify(arr, size, largest); // recursively heapify the subtree with largest child as parent
+    }
+}
+
 int main() {
     Heap h;
     h.insert(50);
@@ -72,6 +93,13 @@ int main() {
     h.insert(53);
     h.insert(52);
     h.insert(54);
+
+
     h.print();
+
+    h.deleteFromHeap();
+
+    h.print();
+
     return 0;
 }
