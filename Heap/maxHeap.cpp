@@ -65,7 +65,7 @@ class Heap {
     }
 };
 
-void heapify(int* &arr, int size, int index) {
+void heapify(int* arr, int size, int index) {
     int largest = index;
     int leftIndex = index * 2;
     int rightIndex = index * 2 + 1;
@@ -100,6 +100,17 @@ int main() {
     h.deleteFromHeap();
 
     h.print();
+
+    // code for heapifying an array
+    int arr[] = {-1, 50, 55, 53, 52, 54};
+    int size = 5;
+    for (int i = size / 2; i >= 1; i--) {
+        heapify(arr, size, i);
+    }
+    cout << "Heapified array: ";
+    for (int i = 1; i <= size; i++) {
+        cout << arr[i] << " ";
+    }
 
     return 0;
 }
